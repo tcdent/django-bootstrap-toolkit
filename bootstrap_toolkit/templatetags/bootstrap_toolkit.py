@@ -5,7 +5,7 @@ from math import floor
 from django.forms import BaseForm
 from django.forms.forms import BoundField
 from django.forms.widgets import (TextInput, Textarea, CheckboxInput, Select, 
-    SelectMultiple, CheckboxSelectMultiple, RadioSelect)
+    SelectMultiple, CheckboxSelectMultiple, RadioSelect, PasswordInput)
 from django.template import Context
 from django.template.loader import get_template
 from django import template
@@ -187,6 +187,8 @@ def bootstrap_input_type(field):
     input_type = getattr(widget, 'bootstrap_input_type', None)
     if input_type:
         return unicode(input_type)
+    if isinstance(widget, PasswordInput):
+        return u'password'
     if isinstance(widget, TextInput):
         return u'text'
     if isinstance(widget, CheckboxInput):
